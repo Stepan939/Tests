@@ -1,0 +1,55 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+    int l;
+    cin >> l; cin.ignore();
+    int h;
+    cin >> h; cin.ignore();
+    string t;
+    getline(cin, t);
+    
+    
+    transform(t.begin(), t.end(), t.begin(), ::toupper);
+    
+    vector<string> ascii_rows(h);
+    
+   
+    for (int i = 0; i < h; i++) {
+        string row;
+        getline(cin, row);
+        ascii_rows[i] = row;
+    }
+
+   
+    for (int i = 0; i < h; i++) {
+        string output_line = "";
+        
+        
+        for (char c : t) {
+           
+            int pos;
+            if (c >= 'A' && c <= 'Z') {
+                pos = c - 'A'; // A=0, B=1, ..., Z=25
+            } else {
+                pos = 26;
+            }
+            
+            
+            int start = pos * l;
+            
+            
+            output_line += ascii_rows[i].substr(start, l);
+        }
+        
+       
+        cout << output_line << endl;
+    }
+
+    return 0;
+}
