@@ -1,0 +1,66 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+    string message;
+    getline(cin, message);
+
+    string binary_string = "";
+    
+    
+    for (char c : message) {
+      
+        int ascii_code = (int)c;
+        
+        
+        string binary_char = "";
+        for (int i = 6; i >= 0; i--) {
+            if (ascii_code & (1 << i)) {
+                binary_char += '1';
+            } else {
+                binary_char += '0';
+            }
+        }
+        binary_string += binary_char;
+    }
+
+    string result = "";
+    char current_bit = binary_string[0];
+    int count = 1;
+
+    for (int i = 1; i <= binary_string.length(); i++) {
+        if (i < binary_string.length() && binary_string[i] == current_bit) {
+            count++;
+        } else {
+           
+            if (!result.empty()) {
+                result += " ";
+            }
+            
+            if (current_bit == '1') {
+                result += "0 ";
+            } else {
+                result += "00 ";
+            }
+            
+            
+            for (int j = 0; j < count; j++) {
+                result += "0";
+            }
+            
+      
+            if (i < binary_string.length()) {
+                current_bit = binary_string[i];
+            }
+            count = 1;
+        }
+    }
+
+    cout << result << endl;
+    return 0;
+}
