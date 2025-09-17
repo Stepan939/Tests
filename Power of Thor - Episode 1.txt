@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+    int light_x, light_y, initial_tx, initial_ty;
+    cin >> light_x >> light_y >> initial_tx >> initial_ty; cin.ignore();
+
+    int thor_x = initial_tx;
+    int thor_y = initial_ty;
+
+    while (1) {
+        int remaining_turns;
+        cin >> remaining_turns; cin.ignore();
+
+        string direction = "";
+
+        if (thor_y > light_y) {
+            direction += "N";
+            thor_y--;
+        }
+        else if (thor_y < light_y) {
+            direction += "S";
+            thor_y++;
+        }
+
+        if (thor_x > light_x) {
+            direction += "W";
+            thor_x--;
+        }
+        else if (thor_x < light_x) {
+            direction += "E";
+            thor_x++;
+        }
+
+        cout << direction << endl;
+    }
+}
