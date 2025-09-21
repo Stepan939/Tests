@@ -1,0 +1,78 @@
+#include <iostream>
+#include <queue>
+#include <cmath>
+using namespace std;
+
+int main() {
+	int n;
+	cin >> n;
+
+
+	int grid[n][n];
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			cin >> grid[i][j];
+		}
+	}
+
+	int center = n / 2;
+
+
+	bool visited[n][n];
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			visited[i][j] = false;
+		}
+	}
+
+
+	int q_i[n * n];
+	int q_j[n * n];
+	int front = 0, rear = 0;
+
+
+	q_i[rear] = center;
+	q_j[rear] = center;
+	rear++;
+	visited[center][center] = true;
+
+
+	int directions[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+	bool can_escape = false;
+
+	while (front < rear && !can_escape) {
+		int i = q_i[front];
+		int j = q_j[front];
+		front++;
+
+
+		if (i == 0 || i == n - 1 || j == 0 || j == n - 1) {
+			can_escape = true;
+			break;
+		}
+
+
+		for (int d = 0; d < 4; d++) {
+			int ni = i + directions[d][0];
+			int nj = j + directions[d][1];
+
+
+			if (ni >= 0 && ni < n && nj >= 0 && nj < n) {
+				if (!visited[ni][nj] && abs(grid[i][j] - grid[ni][nj]) <= 1) {
+					visited[ni][nj] = true;
+					q_i[rear] = ni;
+					q_j[rear] = nj;
+					rear++;
+				}
+			}
+		}
+	}
+
+	if (can_escape) {
+		cout << "yes" << endl;
+	} else {
+		cout << "no" << endl;
+	}
+
+	return 0;
+}
