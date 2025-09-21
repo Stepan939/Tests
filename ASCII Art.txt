@@ -35,7 +35,7 @@ int main()
            
             int pos;
             if (c >= 'A' && c <= 'Z') {
-                pos = c - 'A'; // A=0, B=1, ..., Z=25
+                pos = c - 'A';
             } else {
                 pos = 26;
             }
@@ -52,4 +52,5 @@ int main()
     }
 
     return 0;
+
 }
